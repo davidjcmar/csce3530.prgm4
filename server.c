@@ -40,6 +40,6 @@ int main (void)
     while (byte_rec > 0)
     {
         byte_rec = recv (sock_client, &tcp_h, sizeof tcp_h, 0);
-        printf ("%d", byte_rec);
+        printf ("%d\n", byte_rec);
     }
 }

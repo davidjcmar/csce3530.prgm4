@@ -27,5 +27,5 @@ int main (void)
         return 1;
     }
     bytes_recv = send (sock_des, test, strlen(test), 0);
-    printf ("%d", bytes_recv);
+    printf ("%d\n", bytes_recv);
 }
