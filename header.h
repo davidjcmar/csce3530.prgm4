@@ -12,11 +12,14 @@
 #define SERV_IP "129.120.151.94"
 
 struct tcp_head {
-    short int source_port, dest_port;
-    int seq_num, ack_num;
-    short int flags, window;
-    short int chksum, urg_ptr;
-    int options;
+	short int source_port, dest_port;
+	int seq_num, ack_num;
+	short int flags, window;
+	short int chksum, urg_ptr;
+	int options;
 };
 
+int format_tcp_h(struct tcp_head* tcp_h);
+int send_loop (int, char*, int*);
+int recv_loop ();
 #endif
