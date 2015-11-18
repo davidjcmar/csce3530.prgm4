@@ -27,7 +27,16 @@ int main (void)
 		return 1;
 	}
 	/* set header fields */
+	tcp_h.source_port = PORT_NO;
+	tcp_h.dest_port = PORT_NO;
+	tcp_h.seq_num = 0;
+	tcp_h.ack_num = 0;
+	tcp_h.flags = 0b000010u;
+	tcp_h.window = 0;
+	tcp_h.urg_ptr = 0;
 
+	/* testing */
+	printf ("%u", tcp_h.flags);
 	/* send */
 
 	/* receive */

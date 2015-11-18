@@ -39,8 +39,9 @@ int main (void)
 	addr_size = sizeof client;
 	sock_client = accept (sock_des, (struct sockaddr *)&client, &addr_size);
 
-	/* testing */
-	format_tcp_h(&tcp_h);
+
+
+
 	/* clenup */
 	close (sock_des);
 	return 0;
