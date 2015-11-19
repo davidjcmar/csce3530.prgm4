@@ -2,6 +2,7 @@
 
 int main (void)
 {
+	int i;
 	int sock_des, sock_client;
 	int send_byte, recv_byte, remain_byte, n;
 	struct sockaddr_in server, client;
@@ -87,10 +88,12 @@ int main (void)
 			tcp_h.source_port, tcp_h.dest_port, tcp_h.seq_num,\
 			tcp_h.ack_num, tcp_h.flags, tcp_h.window, tcp_h.chksum, tcp_h.urg_ptr, tcp_h.options);
 		printf ("in there\n"); //testing
-		strcpy(buffer, tcp_h.data);
+		for (i=0; i<strlen(tcp_h.data); i++)
+			buffer[i] = tcp_h.data[i];
+		//strcpy(buffer, tcp_h.data);
 		printf ("like swimwear\n"); //testing
 		strcat(payload, buffer);
-		printf ("which your\n"); //testing
+		printf ("whichor\n"); //testing
 		memset(buffer, '\0', DATA_LEN);
 		printf ("bitchass\n"); //testing
 
@@ -110,7 +113,6 @@ int main (void)
 			send_byte += n;
 			remain_byte -= n;
 		}
-
 	}
 
 	/* close TCP connection */
