@@ -88,7 +88,7 @@ int main (void)
 			tcp_h.source_port, tcp_h.dest_port, tcp_h.seq_num,\
 			tcp_h.ack_num, tcp_h.flags, tcp_h.window, tcp_h.chksum, tcp_h.urg_ptr, tcp_h.options);
 		printf ("in there\n"); //testing
-		printf ("buffer size: %d\n", sizeof buffer);
+		printf ("buffer size: %d\ndata size: %d", sizeof buffer, sizeof tcp_h.data); //testing
 		//strcpy(buffer, tcp_h.data);
 		printf ("like swimwear\n"); //testing
 		strcat(payload, buffer);
