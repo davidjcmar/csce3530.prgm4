@@ -93,6 +93,8 @@ int main (void)
 		memset(buffer, '\0', DATA_LEN);
 
 		/* send ACK */
+		tcp_h.source_port = PORT_NO;
+		tcp_h.dest_port = PORT_NO;
 		tcp_h.seq_num = 0;
 		tcp_h.flags = 0b010000u;
 		tcp_h.ack_num = strlen(buffer);
@@ -118,6 +120,8 @@ int main (void)
 	printf ("%d %d 0x%04x 0x%04x \n0x%02x 0x%02x 0x%02x 0x%02x 0x%04x\n", \
 		tcp_h.source_port, tcp_h.dest_port, tcp_h.seq_num,\
 		tcp_h.ack_num, tcp_h.flags, tcp_h.window, tcp_h.chksum, tcp_h.urg_ptr, tcp_h.options);
+	tcp_h.source_port = PORT_NO;
+	tcp_h.dest_port = PORT_NO;
 	tcp_h.ack_num = tcp_h.seq_num + 1;
 	tcp_h.seq_num = 0;
 	tcp_h.flags = 0b010001u;

@@ -65,6 +65,8 @@ int main (void)
 		tcp_h.source_port, tcp_h.dest_port, tcp_h.seq_num,\
 		tcp_h.ack_num, tcp_h.flags, tcp_h.window, tcp_h.chksum, tcp_h.urg_ptr, tcp_h.options);
 	/* return ACK */
+	tcp_h.source_port = PORT_NO;
+	tcp_h.dest_port = PORT_NO;
 	tcp_h.seq_num += 1;
 	tcp_h.ack_num += 1;
 	tcp_h.flags = 0b010000u; // set ack bit
@@ -83,7 +85,7 @@ int main (void)
 
 	/* send data */
 	memset (tcp_h.data, '\0', DATA_LEN);
-	tcp_h.seq_num = -1;
+	tcp_h.seq_num = 0;
 	tcp_h.ack_num = 0;
 	tcp_h.flags = 0b000000u;
 	while (i < strlen(payload))
