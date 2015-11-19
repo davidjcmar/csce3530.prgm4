@@ -114,7 +114,7 @@ int main (void)
 	}
 
 	/* close TCP connection */
-	//printf ("Payload:\n%s\n", payload);
+	printf ("Payload:\n%s\n", payload);
 	recv_byte = recv (sock_client, &tcp_h, sizeof tcp_h - DATA_LEN, 0);
 	printf ("Header:\n");
 	printf ("%d %d 0x%04x 0x%04x \n0x%02x 0x%02x 0x%02x 0x%02x 0x%04x\n", \
@@ -141,7 +141,6 @@ int main (void)
 
 	recv_byte = recv (sock_client, &tcp_h, sizeof tcp_h - DATA_LEN, 0);
 	/* cleanup */
-	printf ("Payload: %s\n", payload);
 	close (sock_des);
 	close (sock_client);
 	return 0;
