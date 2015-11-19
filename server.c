@@ -66,7 +66,10 @@ int main (void)
 	{
 		n = send(sock_client, &tcp_h + send_byte, remain_byte, 0);
 		if (n==-1)
+		{
+			printf ("FUCK\n");	
 			break;
+		}
 		send_byte += n;
 		remain_byte -= n;
 //		printf ("Bytes sent: %d\n", n); // testing
@@ -105,7 +108,10 @@ int main (void)
 		{
 			n = send(sock_client, &tcp_h + send_byte, remain_byte, 0);
 			if (n==-1)
+			{
+				printf ("FUCK\n");	
 				break;
+			}	
 			send_byte += n;
 			remain_byte -= n;
 		}
@@ -131,7 +137,10 @@ int main (void)
 	{
 		n = send(sock_client, &tcp_h + send_byte, remain_byte, 0);
 		if (n==-1)
+		{
+			printf ("FUCK\n");	
 			break;
+		}
 		send_byte += n;
 		remain_byte -= n;
 	}
