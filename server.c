@@ -93,6 +93,17 @@ int main (void)
 		tcp_h.flags = 0b001000u;
 		tcp_h.ack_num = strlen(buffer);
 		tcp_h.chksum = check_sum(tcp_h, 0);
+		
+		send_byte = 0;
+		remain_byte = sizeof tcp_h;
+		while (send_byte < remain_byte)
+		{
+			n = send(sock_client, &tcp_h + send_byte, remain_byte, 0);
+			if (n==-1)
+				break;
+			send_byte += n;
+			remain_byte -= n;
+		}
 
 	}
 

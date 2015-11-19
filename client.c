@@ -89,9 +89,9 @@ int main (void)
 	{
 		printf ("YO\n"); //testing
 		/* package payload */
-		for (j=0; j<DATA_LEN, i<strlen(payload); i++, j++)
+		for (j=0; j<DATA_LEN && i<strlen(payload); i++, j++)
 		{
-			printf ("%d\n", j);
+			printf ("%d\n", j); //testing
 			tcp_h.data[j] = payload[i];
 		}
 		/* set header values */
