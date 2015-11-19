@@ -92,6 +92,7 @@ int main (void)
 		strcpy(buffer, tcp_h.data);
 	//	printf ("like swimwear\n"); //testing
 		strcat(payload, buffer);
+		printf ("this time: %s\n", payload);
 	//	printf ("whichor\n"); //testing
 		memset(buffer, '\0', DATA_LEN);
 	//	printf ("bitchass\n"); //testing
