@@ -10,8 +10,8 @@ int main (void)
 	char payload[BUFFER_LEN];
 	memset(buffer,'\0',DATA_LEN);
 	memset(payload,'\0',BUFFER_LEN);
-	scanf("%s", payload);
-	printf ("%2048[^\n]\n", payload); // testing
+	scanf("%2048[^\n]", payload);
+	printf ("%s\n", payload); // testing
 	/* create socket */
 	sock_des = socket (AF_INET,SOCK_STREAM,0);
 	if (sock_des == -1)
