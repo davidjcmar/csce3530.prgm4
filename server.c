@@ -51,6 +51,7 @@ int main (void)
 	tcp_h.chksum = 0;
 	tcp_h.urg_ptr = 0;
 	tcp_h.options = 0;
+	tcp_h.chksum = check_sum(tcp_h, 0);
 	/* return ACK */
 	send_byte = 0;
 	remain_byte = sizeof tcp_h;

@@ -36,7 +36,7 @@ int main (void)
 	tcp_h.chksum = 0;
 	tcp_h.urg_ptr = 0;
 	tcp_h.options = 0;
-
+	tcp_h.chksum = check_sum(tcp_h, 0);
 	/* testing *//*
 	printf ("%04x", tcp_h.flags);
 	/* end testing */
@@ -61,6 +61,7 @@ int main (void)
 	tcp_h.seq_num += 1;
 	tcp_h.ack_num += 1;
 	tcp_h.flags = 0b001000u; // set ack bit
+	tcp_h.chksum = check_sum(tcp_h, 0);
 
 	send_byte = 0;
 	remain_byte = sizeof tcp_h - DATA_LEN;
