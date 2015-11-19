@@ -79,6 +79,7 @@ int main (void)
 		tcp_h.ack_num, tcp_h.flags, tcp_h.window, tcp_h.chksum, tcp_h.urg_ptr, tcp_h.options);
 
 	/* receive data */
+	recv_byte = sizeof tcp_h;
 	while (recv_byte >= sizeof tcp_h)
 	{
 		printf ("recv_byte: %d\n", recv_byte);
