@@ -50,6 +50,7 @@ int main (void)
 	tcp_h.window = 0;
 	tcp_h.chksum = 0;
 	tcp_h.urg_ptr = 0;
+	tcp_h.options = 0;
 	/* return ACK */
 	send_byte = 0;
 	remain_byte = sizeof tcp_h;
@@ -63,6 +64,10 @@ int main (void)
 		remain_byte -= n;
 		printf ("Bytes sent: %d\n", n); // testing
 	}
+	/* receive ack */
+	recv_byte = recv (sock_client, &tcp_h, sizeof tcp_h, 0);
+	printf ("%x %x %x %x \n%x %x %x %x %x\n", tcp_h.source_port, tcp_h.dest_port, tcp_h.seq_num,\
+	tcp_h.ack_num, tcp_h.flags, tcp_h.window, tcp_h.chksum, tcp_h.urg_ptr, tcp_h.options);	
 	/* cleanup */
 	close (sock_des);
 	close (sock_client);

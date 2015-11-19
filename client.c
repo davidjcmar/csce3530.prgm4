@@ -35,6 +35,7 @@ int main (void)
 	tcp_h.window = 0;
 	tcp_h.chksum = 0;
 	tcp_h.urg_ptr = 0;
+	tcp_h.options = 0;
 
 	/* testing *//*
 	printf ("%04x", tcp_h.flags);
@@ -56,8 +57,21 @@ int main (void)
 //	printf ("%d", recv_byte);
 	printf ("%x %x %x %x \n%x %x %x %x %x\n", tcp_h.source_port, tcp_h.dest_port, tcp_h.seq_num,\
 	tcp_h.ack_num, tcp_h.flags, tcp_h.window, tcp_h.chksum, tcp_h.urg_ptr, tcp_h.options);
-	/* receive */
+	/* return ACK */
+	tcp_h.seq_num += 1;
+	tcp_h.ack_num += 1;
+	tcp_h.flags = 0b001000u; // set ack bit
 
+	send_byte = 0;
+	remain_byte = sizeof tcp_h;
+	while (send_byte < remain_byte)
+	{
+		n = send(sock_des, &tcp_h + send_byte, remain_byte, 0);
+		if (n==-1)
+			break;
+		send_byte += n;
+		remain_byte -= n;
+	}
 	/* cleanup */
 	close (sock_des);
 	return 0;
