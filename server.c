@@ -45,7 +45,7 @@ int main (void)
 	tcp_h.source_port = PORT_NO;
 	tcp_h.dest_port = PORT_NO;
 	tcp_h.seq_num = 0;
-	tcp_h.ack_num = 0;
+	tcp_h.ack_num = 0 + 1;
 	tcp_h.flags = 0b001010u; // set syn and ack bits
 	tcp_h.window = 0;
 	tcp_h.chksum = 0;
