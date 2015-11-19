@@ -146,6 +146,11 @@ int main (void)
 	}
 	printf ("THREE\n");
 	recv_byte = recv (sock_des, &tcp_h, sizeof tcp_h - DATA_LEN, 0);
+	printf ("Header:\n");
+	printf ("%d %d 0x%04x 0x%04x \n0x%02x 0x%02x 0x%02x 0x%02x 0x%04x\n",\
+	tcp_h.source_port, tcp_h.dest_port, tcp_h.seq_num,\
+	tcp_h.ack_num, tcp_h.flags, tcp_h.window, tcp_h.chksum, tcp_h.urg_ptr, tcp_h.options);
+	
 	temp = tcp_h.ack_num;
 	tcp_h.ack_num = tcp_h.seq_num + 1;
 	tcp_h.seq_num = temp;
