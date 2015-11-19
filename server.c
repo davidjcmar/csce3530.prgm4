@@ -44,6 +44,7 @@ int main (void)
 	
 	/* init TCP connection */ 
 	recv_byte = recv (sock_client, &tcp_h, sizeof tcp_h - DATA_LEN, 0);
+	printf ("Header:\n");
 	printf ("%d %d 0x%04x 0x%04x \n0x%02x 0x%02x 0x%02x 0x%02x 0x%04x\n", tcp_h.source_port, tcp_h.dest_port, tcp_h.seq_num,\
 	tcp_h.ack_num, tcp_h.flags, tcp_h.window, tcp_h.chksum, tcp_h.urg_ptr, tcp_h.options);
 	/* set header fields */
@@ -88,6 +89,7 @@ int main (void)
 		strcpy(buffer, tcp_h.data);
 		strcat(payload, buffer);
 		memset(buffer, '\0', DATA_LEN);
+		printf ("in there\n"); //testing
 		/* send ACK */
 		tcp_h.seq_num = 0;
 		tcp_h.flags = 0b001000u;
@@ -96,6 +98,7 @@ int main (void)
 		
 		send_byte = 0;
 		remain_byte = sizeof tcp_h;
+		printf ("like swimwear\n"); //testing
 		while (send_byte < remain_byte)
 		{
 			n = send(sock_client, &tcp_h + send_byte, remain_byte, 0);
