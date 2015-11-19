@@ -33,6 +33,7 @@ int main (void)
 	tcp_h.ack_num = 0;
 	tcp_h.flags = 0b000010u;
 	tcp_h.window = 0;
+	tcp_h.chksum = 0;
 	tcp_h.urg_ptr = 0;
 
 	/* testing *//*
