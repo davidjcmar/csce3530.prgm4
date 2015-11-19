@@ -85,7 +85,7 @@ int main (void)
 	tcp_h.seq_num = -1;
 	tcp_h.ack_num = 0;
 	tcp_h.flags = 0b000000u;
-	while (int i < strlen(payload))
+	while (i < strlen(payload))
 	{
 		/* package payload */
 		for (j=0; j<DATA_LEN, i<strlen(payload); i++, j++)
