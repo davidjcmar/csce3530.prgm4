@@ -26,4 +26,4 @@ struct tcp_head {
 int send_loop (int, char*, int*);
 int recv_loop ();
 int check_sum (struct tcp_head tcp_h, int data_len);
-#endif
+#endif//
