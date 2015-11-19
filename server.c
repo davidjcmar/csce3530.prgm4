@@ -64,7 +64,6 @@ int main (void)
 //	printf ("Remaining bytes: %d", remain_byte); // testing
 	while (send_byte < remain_byte)
 	{
-		printf ("loops\n");
 		n = send(sock_client, &tcp_h + send_byte, remain_byte, 0);
 		if (n==-1)
 			break;
@@ -104,7 +103,6 @@ int main (void)
 		remain_byte = sizeof tcp_h;
 		while (send_byte < remain_byte)
 		{
-			printf ("loops\n");
 			n = send(sock_client, &tcp_h + send_byte, remain_byte, 0);
 			if (n==-1)
 				break;
@@ -131,7 +129,6 @@ int main (void)
 	remain_byte = sizeof tcp_h;
 	while (send_byte < remain_byte)
 	{
-		printf ("loops\n");
 		n = send(sock_client, &tcp_h + send_byte, remain_byte, 0);
 		if (n==-1)
 			break;
