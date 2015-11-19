@@ -11,7 +11,7 @@ int main (void)
 	memset(buffer,'\0',DATA_LEN);
 	memset(payload,'\0',BUFFER_LEN);
 	scanf("%s", payload);
-	printf ("%s", payload); // testing
+	printf ("%2048[^\n]\n", payload); // testing
 	/* create socket */
 	sock_des = socket (AF_INET,SOCK_STREAM,0);
 	if (sock_des == -1)
