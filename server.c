@@ -93,7 +93,7 @@ int main (void)
 
 		/* send ACK */
 		tcp_h.seq_num = 0;
-		tcp_h.flags = 0b001000u;
+		tcp_h.flags = 0b010000u;
 		tcp_h.ack_num = strlen(buffer);
 		tcp_h.chksum = check_sum(tcp_h, 0);
 		
@@ -118,7 +118,7 @@ int main (void)
 		tcp_h.ack_num, tcp_h.flags, tcp_h.window, tcp_h.chksum, tcp_h.urg_ptr, tcp_h.options);
 	tcp_h.ack_num = tcp_h.seq_num + 1;
 	tcp_h.seq_num = 0;
-	tcp_h.flags = 0b001001u;
+	tcp_h.flags = 0b010001u;
 	tcp_h.chksum = check_sum(tcp_h, 0);
 
 	send_byte = 0;
