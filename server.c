@@ -44,7 +44,7 @@ int main (void)
 	
 	/* init TCP connection */ 
 	recv_byte = recv (sock_client, &tcp_h, sizeof tcp_h - DATA_LEN, 0);
-	printf ("%x %x %x %x \n%x %x %x %x %x\n", tcp_h.source_port, tcp_h.dest_port, tcp_h.seq_num,\
+	printf ("%d %d 0x%04x 0x%04x \n0x%02x 0x%02x 0x%02x 0x%02x 0x%04x\n", tcp_h.source_port, tcp_h.dest_port, tcp_h.seq_num,\
 	tcp_h.ack_num, tcp_h.flags, tcp_h.window, tcp_h.chksum, tcp_h.urg_ptr, tcp_h.options);
 	/* set header fields */
 	tcp_h.source_port = PORT_NO;
@@ -73,7 +73,7 @@ int main (void)
 	/* receive ack */
 	recv_byte = recv (sock_client, &tcp_h, sizeof tcp_h - DATA_LEN, 0);
 	printf ("Header:\n");
-	printf ("%d %d %04x %04x \n%02x %02x %02x %02x %04x\n",\
+	printf ("%d %d 0x%04x 0x%04x \n0x%02x 0x%02x 0x%02x 0x%02x 0x%04x\n",\
 		tcp_h.source_port, tcp_h.dest_port, tcp_h.seq_num,\
 		tcp_h.ack_num, tcp_h.flags, tcp_h.window, tcp_h.chksum, tcp_h.urg_ptr, tcp_h.options);
 
@@ -82,7 +82,7 @@ int main (void)
 	{
 		recv_byte = recv (sock_client, &tcp_h, sizeof tcp_h, 0);
 		printf ("Header:\n");
-		printf ("%d %d %04x %04x \n%02x %02x %02x %02x %04x\n", \
+		printf ("%d %d 0x%04x 0x%04x \n0x%02x 0x%02x 0x%02x 0x%02x 0x%04x\n", \
 			tcp_h.source_port, tcp_h.dest_port, tcp_h.seq_num,\
 			tcp_h.ack_num, tcp_h.flags, tcp_h.window, tcp_h.chksum, tcp_h.urg_ptr, tcp_h.options);
 		strcpy(buffer, tcp_h.data);
