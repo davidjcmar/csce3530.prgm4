@@ -52,7 +52,6 @@ int main (void)
 	tcp_h.urg_ptr = 0;
 	/* return ACK */
 	send_byte = 0;
-	recv_byte = 0;
 	remain_byte = sizeof tcp_h;
 	while (send_byte < remain_byte)
 	{
@@ -61,8 +60,8 @@ int main (void)
 			break;
 		send_byte += n;
 		remain_byte -= n;
+		printf ("Bytes sent: %d\n", n); // testing
 	}
-
 	/* cleanup */
 	close (sock_des);
 	return 0;

@@ -42,7 +42,6 @@ int main (void)
 
 	/* init TCP handshake */
 	send_byte = 0;
-	recv_byte = 0;
 	remain_byte = sizeof tcp_h;
 	while (send_byte < remain_byte)
 	{
