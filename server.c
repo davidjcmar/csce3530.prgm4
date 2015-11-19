@@ -53,6 +53,7 @@ int main (void)
 	/* return ACK */
 	send_byte = 0;
 	remain_byte = sizeof tcp_h;
+	printf ("Remaining bytes: %d", remain_byte); // testing
 	while (send_byte < remain_byte)
 	{
 		n = send(sock_des, &tcp_h + send_byte, remain_byte, 0);
