@@ -85,6 +85,8 @@ int main (void)
 
 	/* send data */
 	memset (tcp_h.data, '\0', DATA_LEN);
+	tcp_h.source_port = PORT_NO;
+	tcp_h.dest_port = PORT_NO;
 	tcp_h.seq_num = 0;
 	tcp_h.ack_num = 0;
 	tcp_h.flags = 0b000000u;
@@ -96,6 +98,8 @@ int main (void)
 			tcp_h.data[j] = payload[i];
 		}
 		/* set header values */
+		tcp_h.source_port = PORT_NO;
+		tcp_h.dest_port = PORT_NO;
 		tcp_h.seq_num += 1;
 		tcp_h.ack_num = 0;
 		tcp_h.flags = 0b000000u;
@@ -121,6 +125,8 @@ int main (void)
 	}
 
 	/* close TCP connection */
+	tcp_h.source_port = PORT_NO;
+	tcp_h.dest_port = PORT_NO;
 	tcp_h.seq_num = 0;
 	tcp_h.ack_num = 0;
 	tcp_h.flags = 0b000001u;
