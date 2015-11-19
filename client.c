@@ -31,7 +31,7 @@ int main (void)
 	tcp_h.dest_port = PORT_NO;
 	tcp_h.seq_num = 0;
 	tcp_h.ack_num = 0;
-	tcp_h.flags = 0b000010u;
+	tcp_h.flags = 0b000010u; // set syn bit
 	tcp_h.window = 0;
 	tcp_h.chksum = 0;
 	tcp_h.urg_ptr = 0;
