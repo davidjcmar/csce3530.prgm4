@@ -6,7 +6,12 @@ int main (void)
 	int send_byte, recv_byte, remain_byte, n;
 	struct sockaddr_in server;
 	struct tcp_head tcp_h;
-
+	char buffer[DATA_LEN];
+	char payload[BUFFER_LEN];
+	memset(buffer,'\0',DATA_LEN);
+	memset(payload,'\0',BUFFER_LEN);
+	scanf("%s", payload);
+	printf ("%s", payload); // testing
 	/* create socket */
 	sock_des = socket (AF_INET,SOCK_STREAM,0);
 	if (sock_des == -1)
@@ -37,9 +42,6 @@ int main (void)
 	tcp_h.urg_ptr = 0;
 	tcp_h.options = 0;
 	tcp_h.chksum = check_sum(tcp_h, 0);
-	/* testing *//*
-	printf ("%04x", tcp_h.flags);
-	/* end testing */
 
 	/* init TCP handshake */
 	send_byte = 0;
@@ -55,8 +57,9 @@ int main (void)
 	/* receive ACK */
 	recv_byte = recv (sock_des, &tcp_h, sizeof tcp_h - DATA_LEN, 0);
 //	printf ("%d", recv_byte);
-	printf ("%x %x %x %x \n%x %x %x %x %x\n", tcp_h.source_port, tcp_h.dest_port, tcp_h.seq_num,\
-	tcp_h.ack_num, tcp_h.flags, tcp_h.window, tcp_h.chksum, tcp_h.urg_ptr, tcp_h.options);
+	printf ("%d %d %04x %04x \n%02x %02x %02x %02x %04x\n",\
+		tcp_h.source_port, tcp_h.dest_port, tcp_h.seq_num,\
+		tcp_h.ack_num, tcp_h.flags, tcp_h.window, tcp_h.chksum, tcp_h.urg_ptr, tcp_h.options);
 	/* return ACK */
 	tcp_h.seq_num += 1;
 	tcp_h.ack_num += 1;
@@ -73,6 +76,9 @@ int main (void)
 		send_byte += n;
 		remain_byte -= n;
 	}
+
+	/* send data */
+	memset (tcp_h.data, '\0', DATA_LEN);
 	/* cleanup */
 	close (sock_des);
 	return 0;
