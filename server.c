@@ -115,7 +115,7 @@ int main (void)
 	}
 
 	/* close TCP connection */
-	printf ("Close connection\n");
+	printf ("%s\n", payload);
 	/* cleanup */
 	close (sock_des);
 	close (sock_client);
