@@ -103,7 +103,7 @@ int main (void)
 		remain_byte = sizeof tcp_h;
 		printf ("%d %d 0x%04x 0x%04x \n0x%02x 0x%02x 0x%02x 0x%02x 0x%04x\n", \
 			tcp_h.source_port, tcp_h.dest_port, tcp_h.seq_num,\
-			tcp_h.ack_num, tcp_h.flags, tcp_h.window, tcp_h.chksum, tcp_h.urg_ptr, tcp_h.options);)
+			tcp_h.ack_num, tcp_h.flags, tcp_h.window, tcp_h.chksum, tcp_h.urg_ptr, tcp_h.options);
 		while (send_byte < remain_byte)
 		{
 			n = send(sock_client, &tcp_h + send_byte, remain_byte, 0);
