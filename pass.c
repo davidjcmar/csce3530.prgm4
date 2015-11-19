@@ -15,9 +15,9 @@ int recv_loop ()
 int check_sum (struct tcp_head tcp_h, int data_len)
 {
     unsigned int i, sum=0, cksum;
-    unsigned short int cksum_arr[88];
+    unsigned short int cksum_arr[76];
 
-    memcpy(cksum_arr, &tcp_h, 196);
+    memcpy(cksum_arr, &tcp_h, 152);
     for (i=0; i<12+(data_len/2); i++)
         sum += cksum_arr[i];
     
