@@ -88,7 +88,7 @@ int main (void)
 			tcp_h.ack_num, tcp_h.flags, tcp_h.window, tcp_h.chksum, tcp_h.urg_ptr, tcp_h.options);
 		strcpy(buffer, tcp_h.data);
 		strcat(payload, buffer);
-		printf ("%s\n", buffer);
+		printf ("Data:\n%s\n", buffer);
 		memset(buffer, '\0', DATA_LEN);
 
 		/* send ACK */
@@ -110,7 +110,7 @@ int main (void)
 	}
 
 	/* close TCP connection */
-	printf ("%s\n", payload);
+	printf ("Payload:\n%s\n", payload);
 	/* cleanup */
 	close (sock_des);
 	close (sock_client);
