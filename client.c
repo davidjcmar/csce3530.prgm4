@@ -87,9 +87,11 @@ int main (void)
 	tcp_h.flags = 0b000000u;
 	while (i < strlen(payload))
 	{
+		printf ("YO\n"); //testing
 		/* package payload */
 		for (j=0; j<DATA_LEN, i<strlen(payload); i++, j++)
 		{
+			printf ("%d\n", j);
 			tcp_h.data[j] = payload[i];
 		}
 		/* set header values */
@@ -113,6 +115,7 @@ int main (void)
 		printf ("%d %d 0x%04x 0x%04x \n0x%02x 0x%02x 0x%02x 0x%02x 0x%04x\n",\
 		tcp_h.source_port, tcp_h.dest_port, tcp_h.seq_num,\
 		tcp_h.ack_num, tcp_h.flags, tcp_h.window, tcp_h.chksum, tcp_h.urg_ptr, tcp_h.options);
+		memset(tcp_h.data,'\0', DATA_LEN);
 	}
 
 	/* close TCP connection */
