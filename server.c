@@ -79,11 +79,9 @@ int main (void)
 		tcp_h.ack_num, tcp_h.flags, tcp_h.window, tcp_h.chksum, tcp_h.urg_ptr, tcp_h.options);
 
 	/* receive data */
-	while (1)
+	while (recv_byte > 0)
 	{
 		recv_byte = recv (sock_client, &tcp_h, sizeof tcp_h, 0);
-		if (recv_byte < 0)
-			break;
 		printf ("Header:\n");
 		printf ("%d %d 0x%04x 0x%04x \n0x%02x 0x%02x 0x%02x 0x%02x 0x%04x\n", \
 			tcp_h.source_port, tcp_h.dest_port, tcp_h.seq_num,\
