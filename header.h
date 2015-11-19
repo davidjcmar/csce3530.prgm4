@@ -12,6 +12,7 @@
 #define SERV_IP "129.120.151.94"
 #define CLIENT_IP "129.120.151.95"
 #define DATA_LEN 128
+#define BUFFER_LEN 2048
 
 struct tcp_head {
 	unsigned short int source_port, dest_port;
