@@ -58,9 +58,10 @@ int main (void)
 	tcp_h.urg_ptr = 0;
 	tcp_h.options = 0;
 	tcp_h.chksum = check_sum(tcp_h, 0);
+	memset(tcp_h.data, '\0', DATA_LEN);
 	/* return ACK */
 	send_byte = 0;
-	remain_byte = sizeof tcp_h;
+	remain_byte = sizeof tcp_h - DATA_LEN;
 //	printf ("Remaining bytes: %d", remain_byte); // testing
 	while (send_byte < remain_byte)
 	{
