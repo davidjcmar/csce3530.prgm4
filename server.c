@@ -38,14 +38,14 @@ int main (void)
 	sock_client = accept (sock_des, (struct sockaddr *)&client, &addr_size);
 	
 	/* init TCP connection */ 
-	recv_byte = recv (sock_client, &tcp_h, sizeof tcp_h, 0);
+	recv_byte = recv (sock_client, &tcp_h, sizeof tcp_h - DATA_LEN, 0);
 	printf ("%x %x %x %x \n%x %x %x %x %x\n", tcp_h.source_port, tcp_h.dest_port, tcp_h.seq_num,\
 	tcp_h.ack_num, tcp_h.flags, tcp_h.window, tcp_h.chksum, tcp_h.urg_ptr, tcp_h.options);
 	/* set header fields */
 	tcp_h.source_port = PORT_NO;
 	tcp_h.dest_port = PORT_NO;
 	tcp_h.seq_num = 0;
-	tcp_h.ack_num = 0 + 1;
+	tcp_h.ack_num = 0;
 	tcp_h.flags = 0b001010u; // set syn and ack bits
 	tcp_h.window = 0;
 	tcp_h.chksum = 0;
@@ -54,7 +54,7 @@ int main (void)
 	/* return ACK */
 	send_byte = 0;
 	remain_byte = sizeof tcp_h;
-	printf ("Remaining bytes: %d", remain_byte); // testing
+//	printf ("Remaining bytes: %d", remain_byte); // testing
 	while (send_byte < remain_byte)
 	{
 		n = send(sock_client, &tcp_h + send_byte, remain_byte, 0);
@@ -62,12 +62,13 @@ int main (void)
 			break;
 		send_byte += n;
 		remain_byte -= n;
-		printf ("Bytes sent: %d\n", n); // testing
+//		printf ("Bytes sent: %d\n", n); // testing
 	}
 	/* receive ack */
-	recv_byte = recv (sock_client, &tcp_h, sizeof tcp_h, 0);
+	recv_byte = recv (sock_client, &tcp_h, sizeof tcp_h - DATA_LEN, 0);
 	printf ("%x %x %x %x \n%x %x %x %x %x\n", tcp_h.source_port, tcp_h.dest_port, tcp_h.seq_num,\
-	tcp_h.ack_num, tcp_h.flags, tcp_h.window, tcp_h.chksum, tcp_h.urg_ptr, tcp_h.options);	
+	tcp_h.ack_num, tcp_h.flags, tcp_h.window, tcp_h.chksum, tcp_h.urg_ptr, tcp_h.options);
+
 	/* cleanup */
 	close (sock_des);
 	close (sock_client);
