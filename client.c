@@ -36,7 +36,7 @@ int main (void)
 	tcp_h.urg_ptr = 0;
 
 	/* testing */
-	printf ("%4x", tcp_h.flags);
+	printf ("%04x", tcp_h.flags);
 	/* send */
 
 	/* receive */
