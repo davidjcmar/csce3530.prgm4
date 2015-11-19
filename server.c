@@ -39,7 +39,12 @@ int main (void)
 	addr_size = sizeof client;
 	sock_client = accept (sock_des, (struct sockaddr *)&client, &addr_size);
 
-
+	while (byte_rec > 0)
+	{
+		byte_rec = recv (sock_client, &tcp_h, sizeof tcp_h, 0);
+		printf ("%x %x %x %x %x %x %x %x %x", tcp_h.source_port, tcp_h.dest_port, tcp_h.seq_num,\
+			tcp_h.ack_num, tcp_h.flags, tcp_h.window, tcp_h.chksum, tcp_h.urg_ptr, tcp_h.options);
+	}
 
 
 	/* clenup */
