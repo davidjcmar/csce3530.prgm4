@@ -7,6 +7,11 @@ int main (void)
 	struct sockaddr_in server, client;
 	struct tcp_head tcp_h;
 	socklen_t addr_size;
+	char buffer[DATA_LEN];
+	char payload[BUFFER_LEN];
+	/* init buffers */
+	memset (buffer, '\0', DATA_LEN);
+	memset (payload, '\0', BUFFER_LEN);
 	/* create socket to client */
 	sock_des = socket (AF_INET, SOCK_STREAM,0);
 	if (sock_des == -1)
@@ -67,9 +72,30 @@ int main (void)
 	}
 	/* receive ack */
 	recv_byte = recv (sock_client, &tcp_h, sizeof tcp_h - DATA_LEN, 0);
-	printf ("%x %x %x %x \n%x %x %x %x %x\n", tcp_h.source_port, tcp_h.dest_port, tcp_h.seq_num,\
-	tcp_h.ack_num, tcp_h.flags, tcp_h.window, tcp_h.chksum, tcp_h.urg_ptr, tcp_h.options);
+	printf ("%d %d %04x %04x \n%02x %02x %02x %02x %04x\n",\
+		tcp_h.source_port, tcp_h.dest_port, tcp_h.seq_num,\
+		tcp_h.ack_num, tcp_h.flags, tcp_h.window, tcp_h.chksum, tcp_h.urg_ptr, tcp_h.options);
 
+	/* receive data */
+	while (recv_byte > 0)
+	{
+		recv_byte = recv (sock_client, &tcp_h, sizeof tcp_h, 0);
+		printf ("%d %d %04x %04x \n%02x %02x %02x %02x %04x\n", \
+			tcp_h.source_port, tcp_h.dest_port, tcp_h.seq_num,\
+			tcp_h.ack_num, tcp_h.flags, tcp_h.window, tcp_h.chksum, tcp_h.urg_ptr, tcp_h.options);
+		strcpy(buffer, tcp_h.data);
+		strcat(payload, buffer);
+		memset(buffer, '\0', DATA_LEN);
+		/* send ACK */
+		tcp_h.seq_num = 0;
+		tcp_h.flags = 0b001000u;
+		tcp_h.ack_num = strlen(buffer);
+		tcp_h.chksum = check_sum(tcp_h, 0);
+
+	}
+
+	/* close TCP connection */
+	printf ("Close connection\n");
 	/* cleanup */
 	close (sock_des);
 	close (sock_client);
