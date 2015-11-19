@@ -63,7 +63,7 @@ int main (void)
 		remain_byte -= n;
 	}
 
-	/* clenup */
+	/* cleanup */
 	close (sock_des);
 	return 0;
 }

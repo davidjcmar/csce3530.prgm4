@@ -54,8 +54,9 @@ int main (void)
 	}
 	/* receive ACK */
 	recv_byte = recv (sock_des, &tcp_h, sizeof tcp_h, 0);
-	printf ("%x %x %x %x \n%x %x %x %x %x\n", tcp_h.source_port, tcp_h.dest_port, tcp_h.seq_num,\
-	tcp_h.ack_num, tcp_h.flags, tcp_h.window, tcp_h.chksum, tcp_h.urg_ptr, tcp_h.options);
+	printf ("%d", recv_byte);
+//	printf ("%x %x %x %x \n%x %x %x %x %x\n", tcp_h.source_port, tcp_h.dest_port, tcp_h.seq_num,\
+//	tcp_h.ack_num, tcp_h.flags, tcp_h.window, tcp_h.chksum, tcp_h.urg_ptr, tcp_h.options);
 	/* receive */
 
 	/* cleanup */
