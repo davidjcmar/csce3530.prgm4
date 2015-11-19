@@ -141,6 +141,7 @@ int main (void)
 
 	recv_byte = recv (sock_client, &tcp_h, sizeof tcp_h - DATA_LEN, 0);
 	/* cleanup */
+	printf ("Payload: %s\n", payload);
 	close (sock_des);
 	close (sock_client);
 	return 0;
