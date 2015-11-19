@@ -79,8 +79,9 @@ int main (void)
 		tcp_h.ack_num, tcp_h.flags, tcp_h.window, tcp_h.chksum, tcp_h.urg_ptr, tcp_h.options);
 
 	/* receive data */
-	recv_byte = sizeof tcp_h;
-	while (recv_byte >= sizeof tcp_h)
+	recv_byte = 0;
+//	while (recv_byte >= sizeof tcp_h)
+	do
 	{
 		printf ("recv_byte: %d\n", recv_byte);
 		recv_byte = recv (sock_client, &tcp_h, sizeof tcp_h, 0);
@@ -114,7 +115,7 @@ int main (void)
 			send_byte += n;
 			remain_byte -= n;
 		}
-	}
+	} while (recv_byte >= sizeof tcp_h);
 
 	/* close TCP connection */
 	printf ("Payload:\n%s\n", payload);
