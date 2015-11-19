@@ -14,12 +14,10 @@ int main (void)
 		printf ("Failed to create socket.\n");
 		return 1;
 	}
-
 	/* set fields in sockaddr_in struct */
 	server.sin_family = AF_INET;
 	server.sin_addr.s_addr = INADDR_ANY;
 	server.sin_port = htons (PORT_NO);
-
 	/* bind socket */
 	bind (sock_des, (struct sockaddr *)&server, sizeof server);
 	if (sock_des == -1)
@@ -38,13 +36,12 @@ int main (void)
 	/* accept incoming connection */
 	addr_size = sizeof client;
 	sock_client = accept (sock_des, (struct sockaddr *)&client, &addr_size);
-
-	while (byte_rec > 0)
-	{
-		byte_rec = recv (sock_client, &tcp_h, sizeof tcp_h, 0);
-	}
+	
+	/* testing */ 
+	byte_rec = recv (sock_client, &tcp_h, sizeof tcp_h, 0);
 	printf ("%x %x %x %x \n%x %x %x %x %x\n", tcp_h.source_port, tcp_h.dest_port, tcp_h.seq_num,\
 	tcp_h.ack_num, tcp_h.flags, tcp_h.window, tcp_h.chksum, tcp_h.urg_ptr, tcp_h.options);
+	/* end testing */
 
 	/* clenup */
 	close (sock_des);
