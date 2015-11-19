@@ -65,5 +65,6 @@ int main (void)
 	}
 	/* cleanup */
 	close (sock_des);
+	close (sock_client);
 	return 0;
 }
