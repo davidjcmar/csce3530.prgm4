@@ -79,7 +79,7 @@ int main (void)
 		tcp_h.ack_num, tcp_h.flags, tcp_h.window, tcp_h.chksum, tcp_h.urg_ptr, tcp_h.options);
 
 	/* receive data */
-	while (recv_byte > 0)
+	while (recv_byte >= sizeof tcp_h)
 	{
 		printf ("recv_byte: %d\n", recv_byte);
 		recv_byte = recv (sock_client, &tcp_h, sizeof tcp_h, 0);
