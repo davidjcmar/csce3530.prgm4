@@ -66,10 +66,7 @@ int main (void)
 	{
 		n = send(sock_client, &tcp_h + send_byte, remain_byte, 0);
 		if (n==-1)
-		{
-			printf ("FUCK\n");	
 			break;
-		}
 		send_byte += n;
 		remain_byte -= n;
 //		printf ("Bytes sent: %d\n", n); // testing
@@ -92,7 +89,7 @@ int main (void)
 		strcpy(buffer, tcp_h.data);
 		strcat(payload, buffer);
 	//	printf ("Data:\n%s\n", buffer);
-		memset(buffer, '\0', DATA_LEN);
+
 
 		/* send ACK */
 		tcp_h.source_port = PORT_NO;
@@ -101,17 +98,14 @@ int main (void)
 		tcp_h.flags = 0b010000u;
 		tcp_h.ack_num = strlen(buffer);
 		tcp_h.chksum = check_sum(tcp_h, 0);
-		
+		memset(buffer, '\0', DATA_LEN);
 		send_byte = 0;
 		remain_byte = sizeof tcp_h;
 		while (send_byte < remain_byte)
 		{
 			n = send(sock_client, &tcp_h + send_byte, remain_byte, 0);
 			if (n==-1)
-			{
-				printf ("FUCK\n");	
 				break;
-			}	
 			send_byte += n;
 			remain_byte -= n;
 		}
@@ -137,10 +131,7 @@ int main (void)
 	{
 		n = send(sock_client, &tcp_h + send_byte, remain_byte, 0);
 		if (n==-1)
-		{
-			printf ("FUCK\n");	
 			break;
-		}
 		send_byte += n;
 		remain_byte -= n;
 	}
