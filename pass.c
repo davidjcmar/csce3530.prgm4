@@ -18,8 +18,16 @@ int check_sum (struct tcp_head tcp_h, int data_len)
     unsigned short int cksum_arr[76];
 
     memcpy(cksum_arr, &tcp_h, 152);
-    for (i=0; i<12+(data_len/2); i++)
-        sum += cksum_arr[i];
+    if (data_len == 0)
+    {
+        for (i=0; i<12; i++)
+            sum += cksum_arr[i];
+    }
+    else
+    {
+        for (i=0; i<76; i++)
+            sum += cksum_arr[i];
+    }
     
     cksum = sum>>16;
     sum = sum & 0x0000FFFF;
