@@ -3,7 +3,7 @@
 int main (void)
 {
 	int sock_des, sock_client;
-
+	int byte_rec = 1;
 	struct sockaddr_in server, client;
 	struct tcp_head tcp_h;
 	socklen_t addr_size;
