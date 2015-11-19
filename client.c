@@ -3,7 +3,7 @@
 int main (void)
 {
 	int sock_des;
-	int bytes_recv;
+	int send_byte, recv_byte, remain_byte, n;
 	struct sockaddr_in server;
 	struct tcp_head tcp_h;
 
@@ -35,10 +35,22 @@ int main (void)
 	tcp_h.window = 0;
 	tcp_h.urg_ptr = 0;
 
-	/* testing */
+	/* testing *//*
 	printf ("%04x", tcp_h.flags);
-	/* send */
+	/* end testing */
 
+	/* send */
+	send_byte = 0;
+	recv_byte = 0;
+	remain_byte = sizeof tcp_h;
+	while (send_byte < remain_byte)
+	{
+		n = send(sock_des, &tcp_h + send_byte, remain_byte, 0);
+		if (n==-1)
+			break;
+		send_byte += n;
+		remain_byte -= n;
+	}
 	/* receive */
 
 	/* cleanup */
