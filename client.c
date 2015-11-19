@@ -88,7 +88,7 @@ int main (void)
 	while (i < strlen(payload))
 	{
 		/* package payload */
-		for (j=0; j<DATA_LEN && i<strlen(payload); i++, j++)
+		for (j=0; j<DATA_LEN-1 && i<strlen(payload); i++, j++)
 		{
 			tcp_h.data[j] = payload[i];
 		}

@@ -2,7 +2,6 @@
 
 int main (void)
 {
-	int i;
 	int sock_des, sock_client;
 	int send_byte, recv_byte, remain_byte, n;
 	struct sockaddr_in server, client;
@@ -87,15 +86,15 @@ int main (void)
 		printf ("%d %d 0x%04x 0x%04x \n0x%02x 0x%02x 0x%02x 0x%02x 0x%04x\n", \
 			tcp_h.source_port, tcp_h.dest_port, tcp_h.seq_num,\
 			tcp_h.ack_num, tcp_h.flags, tcp_h.window, tcp_h.chksum, tcp_h.urg_ptr, tcp_h.options);
-		printf ("in there\n"); //testing
-		printf ("buffer size: %d\ndata size: %d\n", sizeof buffer, sizeof tcp_h.data); //testing
-		printf ("buffer string: %d\ndata string: %d\n", strlen(buffer), strlen(tcp_h.data)); //testing
-		//strcpy(buffer, tcp_h.data);
-		printf ("like swimwear\n"); //testing
+	//	printf ("in there\n"); //testing
+	//	printf ("buffer size: %d\ndata size: %d\n", sizeof buffer, sizeof tcp_h.data); //testing
+	//	printf ("buffer string: %d\ndata string: %d\n", strlen(buffer), strlen(tcp_h.data)); //testing
+		strcpy(buffer, tcp_h.data);
+	//	printf ("like swimwear\n"); //testing
 		strcat(payload, buffer);
-		printf ("whichor\n"); //testing
+	//	printf ("whichor\n"); //testing
 		memset(buffer, '\0', DATA_LEN);
-		printf ("bitchass\n"); //testing
+	//	printf ("bitchass\n"); //testing
 
 		/* send ACK */
 		tcp_h.seq_num = 0;
