@@ -110,7 +110,29 @@ int main (void)
 	}
 
 	/* close TCP connection */
-	printf ("Payload:\n%s\n", payload);
+	//printf ("Payload:\n%s\n", payload);
+	recv_byte = recv (sock_client, &tcp_h, sizeof tcp_h - DATA_LEN, 0);
+	printf ("Header:\n");
+	printf ("%d %d 0x%04x 0x%04x \n0x%02x 0x%02x 0x%02x 0x%02x 0x%04x\n", \
+		tcp_h.source_port, tcp_h.dest_port, tcp_h.seq_num,\
+		tcp_h.ack_num, tcp_h.flags, tcp_h.window, tcp_h.chksum, tcp_h.urg_ptr, tcp_h.options);
+	tcp_h.ack_num = tcp_h.seq_num + 1;
+	tcp_h.seq_num = 0;
+	tcp_h.flags = 0b001001u;
+	tcp_h.chksum = check_sum(tcp_h, 0);
+
+	send_byte = 0;
+	remain_byte = sizeof tcp_h;
+	while (send_byte < remain_byte)
+	{
+		n = send(sock_client, &tcp_h + send_byte, remain_byte, 0);
+		if (n==-1)
+			break;
+		send_byte += n;
+		remain_byte -= n;
+	}
+
+	recv_byte = recv (sock_client, &tcp_h, sizeof tcp_h - DATA_LEN, 0);
 	/* cleanup */
 	close (sock_des);
 	close (sock_client);

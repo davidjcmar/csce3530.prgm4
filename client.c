@@ -9,6 +9,7 @@ int main (void)
 	char buffer[DATA_LEN];
 	char payload[BUFFER_LEN];
 	int i=0,j=0;
+	int temp;
 
 	memset(buffer,'\0',DATA_LEN);
 	memset(payload,'\0',BUFFER_LEN);
@@ -117,7 +118,39 @@ int main (void)
 	}
 
 	/* close TCP connection */
+	tcp_h.seq_num = 0;
+	tcp_h.ack_num = 0;
+	tcp_h.flags = 0b000001u;
+	tcp_h.chksum = check_sum(tcp_h, 0);
 
+	send_byte = 0;
+	remain_byte = sizeof tcp_h - DATA_LEN;
+	while (send_byte < remain_byte)
+	{
+		n = send(sock_des, &tcp_h + send_byte, remain_byte, 0);
+		if (n==-1)
+			break;
+		send_byte += n;
+		remain_byte -= n;
+	}
+
+	recv_byte = recv (sock_des, &tcp_h, sizeof tcp_h - DATA_LEN, 0);
+	temp = tcp_h.ack_num;
+	tcp_h.ack_num = tcp_h.seq_num + 1;
+	tcp_h.seq_num = temp;
+	tcp_h.flags = 0b001000u;
+	tcp_h.chksum = check_sum(tcp_h, 0);
+
+	send_byte = 0;
+	remain_byte = sizeof tcp_h - DATA_LEN;
+	while (send_byte < remain_byte)
+	{
+		n = send(sock_des, &tcp_h + send_byte, remain_byte, 0);
+		if (n==-1)
+			break;
+		send_byte += n;
+		remain_byte -= n;
+	}
 	/* cleanup */
 	close (sock_des);
 	return 0;
