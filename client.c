@@ -58,7 +58,6 @@ int main (void)
 		remain_byte -= n;
 	}
 	/* receive ACK */
-	printf ("ONE\n");
 	recv_byte = recv (sock_des, &tcp_h, sizeof tcp_h - DATA_LEN, 0);
 //	printf ("%d", recv_byte);
 	printf ("Header:\n");
@@ -117,7 +116,6 @@ int main (void)
 			remain_byte -= n;
 		}
 		/* receive ack */
-		printf ("TWO\n");
 		recv_byte = recv (sock_des, &tcp_h, sizeof tcp_h - DATA_LEN, 0);
 		printf ("Header:\n");
 		printf ("%d %d 0x%04x 0x%04x \n0x%02x 0x%02x 0x%02x 0x%02x 0x%04x\n",\
@@ -144,7 +142,6 @@ int main (void)
 		send_byte += n;
 		remain_byte -= n;
 	}
-	printf ("THREE\n");
 	recv_byte = recv (sock_des, &tcp_h, sizeof tcp_h - DATA_LEN, 0);
 	printf ("Header:\n");
 	printf ("%d %d 0x%04x 0x%04x \n0x%02x 0x%02x 0x%02x 0x%02x 0x%04x\n",\

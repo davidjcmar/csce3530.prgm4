@@ -81,7 +81,6 @@ int main (void)
 
 	/* receive data */
 	recv_byte = 0;
-//	while (recv_byte >= sizeof tcp_h)
 	do
 	{
 		printf ("recv_byte: %d\n", recv_byte);
@@ -92,7 +91,7 @@ int main (void)
 			tcp_h.ack_num, tcp_h.flags, tcp_h.window, tcp_h.chksum, tcp_h.urg_ptr, tcp_h.options);
 		strcpy(buffer, tcp_h.data);
 		strcat(payload, buffer);
-	//	printf ("Data:\n%s\n", buffer);
+	//	printf ("Data:\n%s\n", buffer); // testing 
 
 
 		/* send ACK */
@@ -105,9 +104,6 @@ int main (void)
 		memset(buffer, '\0', DATA_LEN);
 		send_byte = 0;
 		remain_byte = sizeof tcp_h - DATA_LEN;
-//		printf ("YO:\n%d %d 0x%04x 0x%04x \n0x%02x 0x%02x 0x%02x 0x%02x 0x%04x\n\n\n", \
-//			tcp_h.source_port, tcp_h.dest_port, tcp_h.seq_num,\
-//			tcp_h.ack_num, tcp_h.flags, tcp_h.window, tcp_h.chksum, tcp_h.urg_ptr, tcp_h.options);
 		while (send_byte < remain_byte)
 		{
 			n = send(sock_client, &tcp_h + send_byte, remain_byte, 0);
@@ -119,7 +115,7 @@ int main (void)
 	} while (recv_byte >= sizeof tcp_h);
 
 	/* close TCP connection */
-	printf ("Payload:\n%s\n", payload);
+//	printf ("Payload:\n%s\n", payload); // testing
 	recv_byte = recv (sock_client, &tcp_h, sizeof tcp_h - DATA_LEN, 0);
 	printf ("Header:\n");
 	printf ("%d %d 0x%04x 0x%04x \n0x%02x 0x%02x 0x%02x 0x%02x 0x%04x\n", \
@@ -129,7 +125,7 @@ int main (void)
 	tcp_h.dest_port = PORT_NO;
 	tcp_h.ack_num = tcp_h.seq_num + 1;
 	tcp_h.seq_num = 0;
-	tcp_h.flags = 0b010001u;
+	tcp_h.flags = 0b010001u; // set ack and fin bits
 	tcp_h.chksum = check_sum(tcp_h, 0);
 
 	send_byte = 0;
